@@ -31,6 +31,10 @@ public class PlatformMove : MonoBehaviour
     private Vector3 endPoint;
     private float fractionOfJourney;
 
+    //platform slow down variables
+    private float speedTimer = 0;
+    private float speedCooldown = 2;
+
     // Start is called before the first frame update
     void Start()
     {
