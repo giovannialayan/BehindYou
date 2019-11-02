@@ -78,7 +78,14 @@ public class PlatformMove : MonoBehaviour
 
                     transform.position = Vector3.Lerp(currentPoint, nextPoint, fractionOfJourney);
 
-                    currentIndex++;
+                    if(transform.position == nextPoint)
+                    {
+                        currentIndex++;
+
+                        startTime = Time.time;
+                    }
+
+                    Debug.Log(currentIndex);
                 }
                 else
                 {
@@ -93,7 +100,11 @@ public class PlatformMove : MonoBehaviour
 
                     transform.position = Vector3.Lerp(currentPoint, nextPoint, fractionOfJourney);
 
-                    currentIndex = 0;
+                    if (transform.position == nextPoint)
+                    {
+                        currentIndex = 0;
+                        startTime = Time.time;
+                    }
                 }
             }
             else if(reverse == true)
