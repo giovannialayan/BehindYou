@@ -8,7 +8,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof (CapsuleCollider))]
     public class RigidbodyFirstPersonController : MonoBehaviour
     {
-        public Vector3 above;
         [Serializable]
         public class MovementSettings
         {
@@ -27,8 +26,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             public void UpdateDesiredTargetSpeed(Vector2 input)
             {
-             
-                if (input == Vector2.zero) return;
+	            if (input == Vector2.zero) return;
 				if (input.x > 0 || input.x < 0)
 				{
 					//strafe
@@ -55,7 +53,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 	            {
 		            m_Running = false;
 	            }
-                
 #endif
             }
 
@@ -64,9 +61,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 get { return m_Running; }
             }
-            
 #endif
-    }
+        }
 
 
         [Serializable]
@@ -133,15 +129,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             RotateView();
-            
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
             {
                 m_Jump = true;
             }
         }
-
-
 
 
         private void FixedUpdate()
@@ -191,9 +184,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 }
             }
             m_Jump = false;
-         
         }
-
 
 
         private float SlopeMultiplier()

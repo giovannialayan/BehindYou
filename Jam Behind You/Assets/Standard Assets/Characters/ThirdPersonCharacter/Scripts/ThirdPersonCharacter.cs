@@ -5,7 +5,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	[RequireComponent(typeof(Rigidbody))]
 	[RequireComponent(typeof(CapsuleCollider))]
 	[RequireComponent(typeof(Animator))]
-    
 	public class ThirdPersonCharacter : MonoBehaviour
 	{
 		[SerializeField] float m_MovingTurnSpeed = 360;
@@ -17,19 +16,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		[SerializeField] float m_AnimSpeedMultiplier = 1f;
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
 
-		public Rigidbody m_Rigidbody;
-		public Animator m_Animator;
-		public bool m_IsGrounded;
-		public float m_OrigGroundCheckDistance;
-		public const float k_Half = 0.5f;
-		public float m_TurnAmount;
-		public float m_ForwardAmount;
-		public Vector3 m_GroundNormal;
-		public float m_CapsuleHeight;
-		public Vector3 m_CapsuleCenter;
-		public CapsuleCollider m_Capsule;
-		public bool m_Crouching;
-        
+		Rigidbody m_Rigidbody;
+		Animator m_Animator;
+		bool m_IsGrounded;
+		float m_OrigGroundCheckDistance;
+		const float k_Half = 0.5f;
+		float m_TurnAmount;
+		float m_ForwardAmount;
+		Vector3 m_GroundNormal;
+		float m_CapsuleHeight;
+		Vector3 m_CapsuleCenter;
+		CapsuleCollider m_Capsule;
+		bool m_Crouching;
+
 
 		void Start()
 		{
