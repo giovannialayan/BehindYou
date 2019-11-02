@@ -36,11 +36,11 @@ public class PlatformMove : MonoBehaviour
     {
         startTime = Time.time;
         originalSize = transform.localScale;
-        if(bezierCurve)
-        {
-            points[2] = new GameObject();
-            points[2].transform.position = points[0].transform.position + (points[1].transform.position - points[0].transform.position) / 2 + Vector3.forward * 5;
-        }
+        //if(bezierCurve)
+        //{
+        //    points[2] = new GameObject();
+        //    points[2].transform.position = points[0].transform.position + (points[1].transform.position - points[0].transform.position) / 2 + Vector3.forward * 5;
+        //}
     }
 
     // Update is called once per frame
@@ -53,10 +53,10 @@ public class PlatformMove : MonoBehaviour
             {
                 reverse = false;
                 int c = points.Count;
-                Vector3 startPoint = points[0].transform.position;
+                //Vector3 startPoint = points[0].transform.position;
                 Vector3 currentPoint;
                 Vector3 nextPoint;
-                Vector3 endPoint;
+                //Vector3 endPoint;
                 //
                 //Debug.Log(startPoint);
                 //Debug.Log(endPoint);
@@ -113,38 +113,11 @@ public class PlatformMove : MonoBehaviour
                 //Debug.Log(endPoint);
                 if(goingBackwards == false)
                 {
-                    for (int i = 0; i < points.Count; i++)
-                    {
-                        //Debug.Log(goingBackwards);
-                        if (i < points.Count - 1)
-                        {
-                            journeyLength = Vector3.Distance(points[i].transform.position, points[i + 1].transform.position);
-
-                            float distCovered = (Time.time - startTime) * speed;
-
-                            fractionOfJourney = distCovered / journeyLength;
-
-                            transform.position = Vector3.Lerp(points[i].transform.position, points[i + 1].transform.position, fractionOfJourney);
-                        }
-                    }
+                    
                     goingBackwards = true;
                 }
                 else if(goingBackwards == true)
                 {
-                    for (int i = points.Count - 1; i > 0; i--)
-                    {
-                        if (i > 0)
-                        {
-                            //Debug.Log(goingBackwards);
-                            journeyLength = Vector3.Distance(points[i].transform.position, points[i - 1].transform.position);
-
-                            float distCovered = (Time.time - startTime) * speed;
-
-                            fractionOfJourney = distCovered / journeyLength;
-
-                            transform.position = Vector3.Lerp(points[i].transform.position, points[i - 1].transform.position, fractionOfJourney);
-                        }
-                    }
                     goingBackwards = false;
                 }
             }
@@ -192,44 +165,44 @@ public class PlatformMove : MonoBehaviour
         }
 
         //using a bezier curve algorithm to move a platform in a curve
-        if (bezierCurve)
-        {
-            if(count < 1 && !goingBackwards)
-            {
-                count += Time.deltaTime;
-
-                Vector3 slope1 = Vector3.Lerp(points[0].transform.position, points[2].transform.position, count);
-                Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[1].transform.position, count);
-                transform.position = Vector3.Lerp(slope1, slope2, count);
-            }
-            else if(count < 1 && goingBackwards)
-            {
-                count += Time.deltaTime;
-
-                Vector3 slope1 = Vector3.Lerp(points[1].transform.position, points[2].transform.position, count);
-                Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[0].transform.position, count);
-                transform.position = Vector3.Lerp(slope1, slope2, count);
-            }
-            else if (!goingBackwards)
-            {
-                goingBackwards = true;
-                count = 0;
-            }
-            else
-            {
-                goingBackwards = false;
-                count = 0;
-            }
-        }
-
-        if(speed < 1)
-        {
-            speedTimer += Time.deltaTime;
-            if(speedTimer >= speedCooldown)
-            {
-                speedTimer = 0;
-                speed = 1;
-            }
-        }
+        //if (bezierCurve)
+        //{
+        //    if(count < 1 && !goingBackwards)
+        //    {
+        //        count += Time.deltaTime;
+        //
+        //        Vector3 slope1 = Vector3.Lerp(points[0].transform.position, points[2].transform.position, count);
+        //        Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[1].transform.position, count);
+        //        transform.position = Vector3.Lerp(slope1, slope2, count);
+        //    }
+        //    else if(count < 1 && goingBackwards)
+        //    {
+        //        count += Time.deltaTime;
+        //
+        //        Vector3 slope1 = Vector3.Lerp(points[1].transform.position, points[2].transform.position, count);
+        //        Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[0].transform.position, count);
+        //        transform.position = Vector3.Lerp(slope1, slope2, count);
+        //    }
+        //    else if (!goingBackwards)
+        //    {
+        //        goingBackwards = true;
+        //        count = 0;
+        //    }
+        //    else
+        //    {
+        //        goingBackwards = false;
+        //        count = 0;
+        //    }
+        //}
+        //
+        //if(speed < 1)
+        //{
+        //    speedTimer += Time.deltaTime;
+        //    if(speedTimer >= speedCooldown)
+        //    {
+        //        speedTimer = 0;
+        //        speed = 1;
+        //    }
+        //}
     }
 }
