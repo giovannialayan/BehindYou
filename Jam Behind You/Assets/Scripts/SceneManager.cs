@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour
 {
+    public static SceneManager Instance;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
     public GameObject player;
     public List<GameObject> coins;
     public int level;
