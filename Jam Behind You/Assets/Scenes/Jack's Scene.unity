@@ -703,6 +703,8 @@ MonoBehaviour:
   - {fileID: 720787841}
   pos: {x: 0, y: 0, z: 0}
   speed: 1
+  basicMovement: 1
+  changeSize: 0
 --- !u!65 &691981495
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1499,6 +1501,7 @@ GameObject:
   - component: {fileID: 1494494432}
   - component: {fileID: 1494494431}
   - component: {fileID: 1494494430}
+  - component: {fileID: 1494494434}
   m_Layer: 0
   m_Name: Platform 2
   m_TagString: Untagged
@@ -1613,6 +1616,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1494494434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494494429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e78e22f4e1e5941ab78990a0ff7ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  pos: {x: 0, y: 0, z: 0}
+  speed: 1
+  basicMovement: 0
+  changeSize: 1
 --- !u!1 &2033317965 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 149790, guid: 7737647c22c1fc64a88d5cd030c352ce,
