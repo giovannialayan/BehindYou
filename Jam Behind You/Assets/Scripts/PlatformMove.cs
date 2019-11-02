@@ -14,9 +14,13 @@ public class PlatformMove : MonoBehaviour
     //size change variables
     private Vector3 originalSize;
 
+    //bezier curve variables
+    private float count = 0;
+
     //platform type to be set in the inspector
     public bool basicMovement;
     public bool changeSize;
+    public bool bezierCurve;
 
     //platform control
     private bool goingBackwards = false;
@@ -32,6 +36,11 @@ public class PlatformMove : MonoBehaviour
     {
         startTime = Time.time;
         originalSize = transform.localScale;
+        if(bezierCurve)
+        {
+            points[2] = new GameObject();
+            points[2].transform.position = points[0].transform.position + (points[1].transform.position - points[0].transform.position) / 2 + Vector3.forward * 5;
+        }
     }
 
     // Update is called once per frame
@@ -161,6 +170,7 @@ public class PlatformMove : MonoBehaviour
         */
         }
 
+        //change size of platform
         if (changeSize)
         {
             if(Vector3.Distance(transform.localScale, originalSize * .5f) > 0 && !goingBackwards)
@@ -178,6 +188,47 @@ public class PlatformMove : MonoBehaviour
             else
             {
                 goingBackwards = false;
+            }
+        }
+
+        //using a bezier curve algorithm to move a platform in a curve
+        if (bezierCurve)
+        {
+            if(count < 1 && !goingBackwards)
+            {
+                count += Time.deltaTime;
+
+                Vector3 slope1 = Vector3.Lerp(points[0].transform.position, points[2].transform.position, count);
+                Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[1].transform.position, count);
+                transform.position = Vector3.Lerp(slope1, slope2, count);
+            }
+            else if(count < 1 && goingBackwards)
+            {
+                count += Time.deltaTime;
+
+                Vector3 slope1 = Vector3.Lerp(points[1].transform.position, points[2].transform.position, count);
+                Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[0].transform.position, count);
+                transform.position = Vector3.Lerp(slope1, slope2, count);
+            }
+            else if (!goingBackwards)
+            {
+                goingBackwards = true;
+                count = 0;
+            }
+            else
+            {
+                goingBackwards = false;
+                count = 0;
+            }
+        }
+
+        if(speed < 1)
+        {
+            speedTimer += Time.deltaTime;
+            if(speedTimer >= speedCooldown)
+            {
+                speedTimer = 0;
+                speed = 1;
             }
         }
     }
