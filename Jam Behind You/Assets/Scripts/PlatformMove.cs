@@ -17,10 +17,15 @@ public class PlatformMove : MonoBehaviour
     //bezier curve variables
     private float count = 0;
 
+    //platform flip variables
+    private float flipCooldown = 0;
+    private bool shouldFlip = true;
+
     //platform type to be set in the inspector
     public bool basicMovement;
     public bool changeSize;
     public bool bezierCurve;
+    public bool flipPlatform;
 
     //platform control
     private bool goingBackwards = false;
@@ -200,7 +205,7 @@ public class PlatformMove : MonoBehaviour
         {
             if(count < 1 && !goingBackwards)
             {
-                count += Time.deltaTime;
+                count += Time.deltaTime * speed;
 
                 Vector3 slope1 = Vector3.Lerp(points[0].transform.position, points[2].transform.position, count);
                 Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[1].transform.position, count);
@@ -226,6 +231,36 @@ public class PlatformMove : MonoBehaviour
             }
         }
 
+        //flip a platform
+        if (flipPlatform)
+        {
+            if (shouldFlip)
+            {
+                transform.RotateAround(transform.position, Vector3.forward, speed);
+                Debug.Log(transform.rotation);
+                for (int i = -1; i <= 1; i+=2)
+                {
+                    if (transform.rotation == new Quaternion(0, 0, 0, i) || transform.rotation == new Quaternion(0, 0, i, 0))
+                    {
+                        shouldFlip = false;
+                        break;
+                    }
+                }
+                
+            }
+            else
+            {
+                flipCooldown += Time.deltaTime;
+            }
+
+            if (flipCooldown >= 3)
+            {
+                shouldFlip = true;
+                flipCooldown = 0;
+            }
+        }
+
+        //cooldown for returning speed of platform to normal
         if(speed < 1)
         {
             speedTimer += Time.deltaTime;
