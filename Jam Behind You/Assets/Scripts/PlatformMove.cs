@@ -14,40 +14,37 @@ public class PlatformMove : MonoBehaviour
     //size change variables
     private Vector3 originalSize;
 
+    //bezier curve variables
+    private float count = 0;
+
     //platform type to be set in the inspector
     public bool basicMovement;
     public bool changeSize;
+    public bool bezierCurve;
 
     //platform control
     private bool goingBackwards = false;
+    private float speedTimer = 0;
+    private float speedCooldown = 2;
 
     // Start is called before the first frame update
     void Start()
     {
         startTime = Time.time;
         originalSize = transform.localScale;
+        if(bezierCurve)
+        {
+            points[2] = new GameObject();
+            points[2].transform.position = points[0].transform.position + (points[1].transform.position - points[0].transform.position) / 2 + Vector3.forward * 5;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //handle moving from point A to point B
+        //moving platform from point A to point B
         if (basicMovement)
         {
-            //for (int i = 0; i < points.Count; i++)
-            //{
-            //    if (i <= points.Count - 1)
-            //    {
-            //        journeyLength = Vector3.Distance(points[i].transform.position, points[i + 1].transform.position);
-
-            //        float distCovered = (Time.time - startTime) * speed;
-
-            //        float fractionOfJourney = distCovered / journeyLength;
-
-            //        transform.position = Vector3.Lerp(points[i].transform.position, points[i + 1].transform.position, fractionOfJourney);
-            //    }
-            //}
-
             if (Vector3.Distance(transform.position, points[1].transform.position) > 0 && !goingBackwards)
             {
                 transform.position = Vector3.MoveTowards(transform.position, points[1].transform.position, speed * Time.deltaTime);
@@ -66,6 +63,7 @@ public class PlatformMove : MonoBehaviour
             }
         }
 
+        //change size of platform
         if (changeSize)
         {
             if(Vector3.Distance(transform.localScale, originalSize * .5f) > 0 && !goingBackwards)
@@ -83,6 +81,47 @@ public class PlatformMove : MonoBehaviour
             else
             {
                 goingBackwards = false;
+            }
+        }
+
+        //using a bezier curve algorithm to move a platform in a curve
+        if (bezierCurve)
+        {
+            if(count < 1 && !goingBackwards)
+            {
+                count += Time.deltaTime;
+
+                Vector3 slope1 = Vector3.Lerp(points[0].transform.position, points[2].transform.position, count);
+                Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[1].transform.position, count);
+                transform.position = Vector3.Lerp(slope1, slope2, count);
+            }
+            else if(count < 1 && goingBackwards)
+            {
+                count += Time.deltaTime;
+
+                Vector3 slope1 = Vector3.Lerp(points[1].transform.position, points[2].transform.position, count);
+                Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[0].transform.position, count);
+                transform.position = Vector3.Lerp(slope1, slope2, count);
+            }
+            else if (!goingBackwards)
+            {
+                goingBackwards = true;
+                count = 0;
+            }
+            else
+            {
+                goingBackwards = false;
+                count = 0;
+            }
+        }
+
+        if(speed < 1)
+        {
+            speedTimer += Time.deltaTime;
+            if(speedTimer >= speedCooldown)
+            {
+                speedTimer = 0;
+                speed = 1;
             }
         }
     }
