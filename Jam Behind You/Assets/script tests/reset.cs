@@ -23,7 +23,7 @@ public class reset : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other);
-        if (other.gameObject.name == "Sphere (3)")
+        if (other.gameObject.name == "Boulder")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
