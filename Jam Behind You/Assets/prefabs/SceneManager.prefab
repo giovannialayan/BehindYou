@@ -42,14 +42,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3555856470037491237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 317471b06efbe7749b4f57b6e17f5f33, type: 3}
+  m_Script: {fileID: 11500000, guid: e709123ec7a311d47a8b355376c6b15b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   coins: []
-  toLevelTwo: {fileID: 3555856471091405910}
-  toLevelThree: {fileID: 3555856471451701479}
+  toLevelTwo: {fileID: 0}
+  toLevelThree: {fileID: 0}
   level: 0
+  timeText: {fileID: 0}
 --- !u!1 &3555856471091405907
 GameObject:
   m_ObjectHideFlags: 0
