@@ -14,7 +14,7 @@ public class reset : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y <= -10f)
+        if (transform.position.y <= -10f || Input.GetKeyDown("r"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
