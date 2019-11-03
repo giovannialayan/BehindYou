@@ -29,4 +29,19 @@ public class reset : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Platform"))
+        {
+            transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Platform"))
+        {
+            transform.parent = null;
+        }
+    }
 }
