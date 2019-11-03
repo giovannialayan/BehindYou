@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour
             if (player.GetComponent<CapsuleCollider>().bounds.Contains(coins[i].transform.position))
             {
                 Destroy(coins[i]);
+                coins.Remove(coins[i]);
                 score += 100;
             }
         }
