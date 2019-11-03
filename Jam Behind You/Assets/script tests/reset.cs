@@ -31,7 +31,7 @@ public class reset : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name.Contains("Platform"))
+        if (collision.gameObject.tag == "Platform")
         {
             transform.parent = collision.transform;
         }
@@ -39,7 +39,7 @@ public class reset : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name.Contains("Platform"))
+        if (collision.gameObject.tag == "Platform")
         {
             transform.parent = null;
         }
