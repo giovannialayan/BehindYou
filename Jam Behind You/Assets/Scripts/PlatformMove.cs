@@ -90,7 +90,6 @@ public class PlatformMove : MonoBehaviour
                         startTime = Time.time;
                     }
 
-                    Debug.Log(currentIndex);
                 }
                 else
                 {

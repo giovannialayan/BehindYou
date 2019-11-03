@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
     private int score;
     private bool guiTwo = false;
     private bool guiThree = false;
+    public Text timeText;
 
     // Start is called before the first frame update
     void Start()
@@ -99,6 +101,10 @@ public class LevelManager : MonoBehaviour
                     break;
             }
         }
+
+        float minutes = Mathf.Floor(Time.time / 60);
+        float seconds = Mathf.Floor(Time.time % 60);
+        LevelManager.Instance.timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     IEnumerator LoadAsyncScene(string scene)
