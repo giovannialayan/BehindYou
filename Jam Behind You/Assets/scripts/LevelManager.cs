@@ -103,8 +103,9 @@ public class LevelManager : MonoBehaviour
         }
 
         float minutes = Mathf.Floor(Time.time / 60);
-        float seconds = Mathf.Floor(Time.time % 60);
-        LevelManager.Instance.timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        float seconds = Time.time % 60;
+        float centiseconds = Mathf.FloorToInt(Time.time * 100 % 100);
+        LevelManager.Instance.timeText.text = string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, centiseconds);
     }
 
     IEnumerator LoadAsyncScene(string scene)
