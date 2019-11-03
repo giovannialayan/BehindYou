@@ -89,7 +89,6 @@ public class PlatformMove : MonoBehaviour
 
                         startTime = Time.time;
                     }
-
                 }
                 else
                 {
@@ -114,19 +113,71 @@ public class PlatformMove : MonoBehaviour
             else if(reverse == true)
             {
                 loop = false;
+
+                int c = points.Count;
+                //Vector3 startPoint = points[0].transform.position;
+                Vector3 currentPoint;
+                Vector3 nextPoint;
                 //Vector3 startPoint = points[0].transform.position;
                 //Vector3 endPoint = points[points.Count - 1].transform.position;
                 //
                 //Debug.Log(startPoint);
                 //Debug.Log(endPoint);
-                if(goingBackwards == false)
+                if (goingBackwards == false)
                 {
-                    
-                    goingBackwards = true;
+                    if (currentIndex < (c - 1))
+                    {
+                        currentPoint = points[currentIndex].transform.position;
+                        nextPoint = points[currentIndex + 1].transform.position;
+
+                        journeyLength = Vector3.Distance(currentPoint, nextPoint);
+
+                        float distCovered = (Time.time - startTime) * speed;
+
+                        fractionOfJourney = distCovered / journeyLength;
+
+                        transform.position = Vector3.Lerp(currentPoint, nextPoint, fractionOfJourney);
+
+                        if (transform.position == nextPoint)
+                        {
+                            currentIndex++;
+
+                            startTime = Time.time;
+                        }
+                    }
+                    else
+                    {
+                        goingBackwards = true;
+                    }
                 }
                 else if(goingBackwards == true)
                 {
-                    goingBackwards = false;
+                    if (currentIndex > 0)
+                    {
+                        currentPoint = points[currentIndex].transform.position;
+                        nextPoint = points[currentIndex - 1].transform.position;
+
+                        journeyLength = Vector3.Distance(currentPoint, nextPoint);
+
+                        float distCovered = (Time.time - startTime) * speed;
+
+                        fractionOfJourney = distCovered / journeyLength;
+
+                        transform.position = Vector3.Lerp(currentPoint, nextPoint, fractionOfJourney);
+
+                        if (transform.position == nextPoint)
+                        {
+                            currentIndex--;
+
+                            startTime = Time.time;
+                        }
+
+                        Debug.Log(currentIndex);
+                    }
+                    else
+                    {
+                        goingBackwards = false;
+                    }
                 }
             }
 
