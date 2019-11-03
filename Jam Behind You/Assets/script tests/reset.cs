@@ -14,10 +14,10 @@ public class reset : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y <= -10f || Input.GetKeyDown("r"))
+        if (transform.position.y <= -15f || Input.GetKeyDown("r"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
+            GameObject.Find("SceneManager").GetComponent<LevelManager>().deathCounter++;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -26,6 +26,7 @@ public class reset : MonoBehaviour
         if (other.gameObject.name == "Boulder")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GameObject.Find("SceneManager").GetComponent<LevelManager>().deathCounter++;
         }
     }
 
