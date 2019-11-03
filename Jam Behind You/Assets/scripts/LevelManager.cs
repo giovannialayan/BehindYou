@@ -106,7 +106,6 @@ public class LevelManager : MonoBehaviour
         float seconds = Time.time % 60;
         float centiseconds = Mathf.FloorToInt(Time.time * 100 % 100);
         LevelManager.Instance.timeText.text = string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, centiseconds);
-        Debug.Log(centiseconds);
     }
 
     IEnumerator LoadAsyncScene(string scene)
