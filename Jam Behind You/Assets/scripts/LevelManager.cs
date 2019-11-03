@@ -130,7 +130,7 @@ public class LevelManager : MonoBehaviour
 
         GUI.skin.box.wordWrap = true;
 
-        GUI.Box(new Rect(10, 10, 100, 60), "Level: " + level + "\nScore: " + score);
+        GUI.Box(new Rect(10, 10, 160, 60), "Level: " + level + "\nScore: " + score);
         if (guiTwo == true)
         {
             GUI.Box(new Rect(new Vector2(100, 0), new Vector2(700, 100)),
