@@ -29,7 +29,7 @@ public class PlatformMove : MonoBehaviour
 
     //platform control
     private bool goingBackwards = false;
-    public bool reverse = true;
+    public bool reverse = false;
     public bool loop = false;
     private int currentIndex = 0;
 
@@ -45,11 +45,11 @@ public class PlatformMove : MonoBehaviour
     {
         startTime = Time.time;
         originalSize = transform.localScale;
-        //if(bezierCurve)
-        //{
-        //    points[2] = new GameObject();
-        //    points[2].transform.position = points[0].transform.position + (points[1].transform.position - points[0].transform.position) / 2 + Vector3.forward * 5;
-        //}
+        if (bezierCurve)
+        {
+            points[2] = new GameObject();
+            points[2].transform.position = points[0].transform.position + (points[1].transform.position - points[0].transform.position) / 2 + Vector3.forward * 5;
+        }
     }
 
     // Update is called once per frame
@@ -186,7 +186,7 @@ public class PlatformMove : MonoBehaviour
             }
             else if(count < 1 && goingBackwards)
             {
-                count += Time.deltaTime;
+                count += Time.deltaTime * speed;
 
                 Vector3 slope1 = Vector3.Lerp(points[1].transform.position, points[2].transform.position, count);
                 Vector3 slope2 = Vector3.Lerp(points[2].transform.position, points[0].transform.position, count);
@@ -210,7 +210,6 @@ public class PlatformMove : MonoBehaviour
             if (shouldFlip)
             {
                 transform.RotateAround(transform.position, Vector3.forward, speed);
-                Debug.Log(transform.rotation);
                 for (int i = -1; i <= 1; i+=2)
                 {
                     if (transform.rotation == new Quaternion(0, 0, 0, i) || transform.rotation == new Quaternion(0, 0, i, 0))
@@ -219,7 +218,6 @@ public class PlatformMove : MonoBehaviour
                         break;
                     }
                 }
-                
             }
             else
             {

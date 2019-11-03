@@ -392,11 +392,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: []
   pos: {x: 0, y: 0, z: 0}
-  speed: 5
+  speed: 1
   basicMovement: 0
-  changeSize: 0
+  changeSize: 1
   bezierCurve: 0
-  flipPlatform: 1
+  flipPlatform: 0
   reverse: 0
   loop: 0
 --- !u!65 &511226316
@@ -1213,7 +1213,7 @@ MonoBehaviour:
   changeSize: 0
   bezierCurve: 0
   flipPlatform: 0
-  reverse: 1
+  reverse: 0
   loop: 0
 --- !u!65 &1158183736
 BoxCollider:
