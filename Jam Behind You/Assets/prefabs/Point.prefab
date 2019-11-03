@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1336595303811230144}
   - component: {fileID: 1336595303811230147}
   m_Layer: 0
-  m_Name: Point (0, 0, 0)
+  m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336595303811230146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

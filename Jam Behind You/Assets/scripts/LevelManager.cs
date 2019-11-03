@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
     public BoxCollider toLevelTwo;
     public BoxCollider toLevelThree;
     public int level;
-    private int score;
+    public int score;
     private bool guiTwo = false;
     private bool guiThree = false;
     public Text timeText;

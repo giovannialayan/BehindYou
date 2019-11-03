@@ -7,6 +7,8 @@ public class winning : MonoBehaviour
 {
     public Text winning_text;
     public Image winscreen;
+    public LevelManager levelmanager;
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +26,7 @@ public class winning : MonoBehaviour
         winning_text.color = new Color(.2f, .2f, .2f, 1f);
         winscreen.color = new Color(.8f, .8f, .8f, 1f);
         Destroy(other.gameObject);
+        winning_text.text += "\nScore:" + levelmanager.score; 
     }
+
 }
